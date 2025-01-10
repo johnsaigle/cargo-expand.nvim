@@ -2,6 +2,9 @@
 -- lua/cargo-expand/cache.lua
 local M = {}
 
+-- two week
+local lifetime = 60 * 60 * 24 * 7 * 2
+
 -- Get the cache directory following XDG spec
 function M.get_cache_dir()
     local cache_dir = vim.fn.stdpath('cache')
@@ -39,7 +42,7 @@ function M.get_cached_expansion()
         local cache_time = vim.fn.getftime(cache_file)
         local current_time = os.time()
 
-        if current_time - cache_time < 300 then
+        if current_time - cache_time < lifetime then
             local lines = vim.fn.readfile(cache_file)
             return table.concat(lines, '\n')
         end
