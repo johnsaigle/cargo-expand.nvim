@@ -1,4 +1,3 @@
--- lua/cargo-expand/init.lua
 local M = {}
 
 -- Default configuration
